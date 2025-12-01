@@ -85,7 +85,7 @@ Perform a web search using SearXNG.
 - `language`: Language code (e.g., `"en"`)
 - `pageno`: Page number for pagination
 - `time_range`: Time filter (`"day"`, `"week"`, `"month"`, `"year"`)
-- `safesearch`: Safe search level (`"0"`, `"1"`, `"2"`)
+- `safesearch`: Safe search level (`0`, `1`, `2`)
 
 ### get_engines
 

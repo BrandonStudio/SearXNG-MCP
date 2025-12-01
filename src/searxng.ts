@@ -111,9 +111,9 @@ export class SearXNGClient {
   }
 
   /**
-   * Get available search engines from SearXNG
+   * Fetch the config from SearXNG
    */
-  async getEngines(): Promise<SearXNGEngine[]> {
+  private async fetchConfig(): Promise<SearXNGConfigResponse> {
     const url = new URL("/config", this.baseUrl);
 
     const response = await fetch(url.toString(), {
@@ -128,29 +128,22 @@ export class SearXNGClient {
       throw new Error(`SearXNG config fetch failed: ${response.status} ${response.statusText}`);
     }
 
-    const data = await response.json() as SearXNGConfigResponse;
-    return data.engines || [];
+    return await response.json() as SearXNGConfigResponse;
+  }
+
+  /**
+   * Get available search engines from SearXNG
+   */
+  async getEngines(): Promise<SearXNGEngine[]> {
+    const config = await this.fetchConfig();
+    return config.engines || [];
   }
 
   /**
    * Get available categories from SearXNG
    */
   async getCategories(): Promise<string[]> {
-    const url = new URL("/config", this.baseUrl);
-
-    const response = await fetch(url.toString(), {
-      method: "GET",
-      headers: {
-        "Accept": "application/json",
-        "User-Agent": "SearXNG-MCP/1.0",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`SearXNG config fetch failed: ${response.status} ${response.statusText}`);
-    }
-
-    const data = await response.json() as SearXNGConfigResponse;
-    return data.categories || [];
+    const config = await this.fetchConfig();
+    return config.categories || [];
   }
 }

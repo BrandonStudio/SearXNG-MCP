@@ -35,7 +35,7 @@ server.registerTool(
       language: z.string().optional().describe("Language code (e.g., 'en', 'de', 'fr')"),
       pageno: z.number().optional().describe("Page number for pagination (default: 1)"),
       time_range: z.enum(["day", "week", "month", "year"]).optional().describe("Time range filter"),
-      safesearch: z.enum(["0", "1", "2"]).optional().describe("Safe search level (0=off, 1=moderate, 2=strict)"),
+      safesearch: z.number().min(0).max(2).optional().describe("Safe search level (0=off, 1=moderate, 2=strict)"),
     },
   },
   async (args) => {
@@ -47,7 +47,7 @@ server.registerTool(
         language: args.language,
         pageno: args.pageno,
         time_range: args.time_range,
-        safesearch: args.safesearch ? parseInt(args.safesearch, 10) as 0 | 1 | 2 : undefined,
+        safesearch: args.safesearch as 0 | 1 | 2 | undefined,
       });
 
       const formattedResults = formatSearchResults(results);
