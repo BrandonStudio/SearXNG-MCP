@@ -30,7 +30,7 @@ npm run build
 The server can be configured using environment variables:
 
 | Variable | Description | Default |
-|----------|-------------|---------|
+| -------- | ----------- | ------- |
 | `SEARXNG_URL` | URL of your SearXNG instance | `http://localhost:8080` |
 | `PORT` | Port for HTTP transport | `3000` |
 | `TRANSPORT_MODE` | Transport mode: `http` or `stdio` | `http` |

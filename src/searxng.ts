@@ -53,6 +53,9 @@ export interface SearXNGConfigResponse {
 
 export class SearXNGClient {
   private baseUrl: string;
+  private configCache: SearXNGConfigResponse | null = null;
+  private configCacheTime: number = 0;
+  private static CONFIG_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 
   constructor(baseUrl: string) {
     // Normalize URL - remove trailing slash
@@ -111,9 +114,16 @@ export class SearXNGClient {
   }
 
   /**
-   * Fetch the config from SearXNG
+   * Fetch the config from SearXNG with caching
    */
   private async fetchConfig(): Promise<SearXNGConfigResponse> {
+    const now = Date.now();
+    
+    // Return cached config if still valid
+    if (this.configCache && (now - this.configCacheTime) < SearXNGClient.CONFIG_CACHE_TTL_MS) {
+      return this.configCache;
+    }
+
     const url = new URL("/config", this.baseUrl);
 
     const response = await fetch(url.toString(), {
@@ -128,7 +138,13 @@ export class SearXNGClient {
       throw new Error(`SearXNG config fetch failed: ${response.status} ${response.statusText}`);
     }
 
-    return await response.json() as SearXNGConfigResponse;
+    const config = await response.json() as SearXNGConfigResponse;
+    
+    // Update cache
+    this.configCache = config;
+    this.configCacheTime = now;
+    
+    return config;
   }
 
   /**
