@@ -1,0 +1,11 @@
+{
+  "compatibility_date": "2025-10-08",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "src/cf-worker.ts",
+  "name": "searxng-mcp",
+  "observability": {
+    "logs": {
+      "enabled": true,
+    },
+  },
+}

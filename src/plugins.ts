@@ -108,7 +108,7 @@ export function registerSearchTool(server: McpServer, searxngClient?: SearXNGCli
         ...BASIC_SEARCH_SCHEMA,
         inputSchema: {
           ...BASIC_SEARCH_SCHEMA.inputSchema,
-          engineUrl: z.url().describe("The base URL of the SearXNG instance to use"),
+          engineUrl: z.string().url().describe("The base URL of the SearXNG instance to use"),
         },
       },
       (args) => {
@@ -160,7 +160,7 @@ export function registerGetEnginesTool(server: McpServer, searxngClient?: SearXN
       {
         ...GET_ENGINES_SCHEMA,
         inputSchema: {
-          engineUrl: z.url().describe("The base URL of the SearXNG instance to use"),
+          engineUrl: z.string().url().describe("The base URL of the SearXNG instance to use"),
         },
       },
       (args) => getEnginesToolHandlerBase(new SearXNGClient(args.engineUrl)),

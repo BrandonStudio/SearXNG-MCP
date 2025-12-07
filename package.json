@@ -10,17 +10,27 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli.js",
-    "dev": "tsc --watch"
+    "wrangler:dev": "wrangler dev src/cf-worker.ts",
+    "wrangler:deploy": "wrangler deploy --keep-vars"
   },
-  "keywords": ["mcp", "searxng", "search", "metasearch", "model-context-protocol"],
+  "keywords": [
+    "mcp",
+    "searxng",
+    "search",
+    "metasearch",
+    "model-context-protocol"
+  ],
   "author": "BrandonStudio",
   "license": "",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.23.0",
-    "zod": "^4.1.13"
+    "agents": "^0.2.30",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251205.0",
     "@types/node": "^24.10.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.53.0"
   }
 }

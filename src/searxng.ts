@@ -51,6 +51,14 @@ export interface SearXNGConfigResponse {
   safe_search: number;
 }
 
+export function getSearXNGClient(baseUrl: string): SearXNGClient;
+export function getSearXNGClient(baseUrl: undefined): undefined;
+export function getSearXNGClient(baseUrl?: string): SearXNGClient | undefined;
+
+export function getSearXNGClient(baseUrl?: string) {
+  return baseUrl ? new SearXNGClient(baseUrl) : undefined;
+}
+
 export class SearXNGClient {
   private baseUrl: string;
   private configCache: SearXNGConfigResponse | null = null;
