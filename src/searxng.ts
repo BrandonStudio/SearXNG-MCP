@@ -67,7 +67,7 @@ export class SearXNGClient {
    */
   async search(params: SearXNGSearchParams): Promise<SearXNGSearchResult[]> {
     const url = new URL("/search", this.baseUrl);
-    
+
     // Required parameters
     url.searchParams.set("q", params.query);
     url.searchParams.set("format", "json");
@@ -118,7 +118,7 @@ export class SearXNGClient {
    */
   private async fetchConfig(): Promise<SearXNGConfigResponse> {
     const now = Date.now();
-    
+
     // Return cached config if still valid
     if (this.configCache && (now - this.configCacheTime) < SearXNGClient.CONFIG_CACHE_TTL_MS) {
       return this.configCache;
@@ -139,11 +139,11 @@ export class SearXNGClient {
     }
 
     const config = await response.json() as SearXNGConfigResponse;
-    
+
     // Update cache
     this.configCache = config;
     this.configCacheTime = now;
-    
+
     return config;
   }
 

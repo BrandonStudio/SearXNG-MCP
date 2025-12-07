@@ -1,20 +1,20 @@
 {
   "name": "searxng-mcp",
-  "version": "1.0.0",
-  "description": "MCP server for SearXNG - a privacy-respecting metasearch engine",
+  "version": "0.1.0",
+  "description": "MCP server for SearXNG",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/cli.js",
   "bin": {
-    "searxng-mcp": "./dist/index.js"
+    "searxng-mcp": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/cli.js",
     "dev": "tsc --watch"
   },
   "keywords": ["mcp", "searxng", "search", "metasearch", "model-context-protocol"],
-  "author": "",
-  "license": "MIT",
+  "author": "BrandonStudio",
+  "license": "",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.23.0",
     "zod": "^4.1.13"
