@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -64,8 +62,8 @@ server.registerTool(
     description: "Search the web using SearXNG metasearch engine",
     inputSchema: {
       query: z.string().describe("The search query"),
-      categories: z.array(z.string()).optional().describe("Categories to search (e.g., 'general', 'images', 'videos', 'news', 'music', 'files', 'it', 'science', 'social media')"),
-      engines: z.array(z.string()).optional().describe("Specific engines to use (e.g., 'google', 'bing', 'duckduckgo')"),
+      categories: z.array(z.string()).optional().describe("Categories to search (e.g., 'general', 'images', 'videos', etc)"),
+      engines: z.array(z.string()).optional().describe("Specific engines to use (e.g., 'google', 'bing', etc. You may obtain all supported engines via the get_engines tool.)"),
       language: z.string().optional().describe("Language code (e.g., 'en', 'de', 'fr')"),
       pageno: z.number().optional().describe("Page number for pagination (default: 1)"),
       time_range: z.enum(["day", "week", "month", "year"]).optional().describe("Time range filter"),
@@ -176,8 +174,7 @@ function formatEngines(engines: SearXNGEngine[]): string {
   for (const [category, categoryEngines] of Array.from(byCategory.entries()).sort()) {
     lines.push(`\n## ${category.charAt(0).toUpperCase() + category.slice(1)}`);
     for (const engine of categoryEngines) {
-      const status = engine.enabled ? "✓" : "✗";
-      lines.push(`  ${status} ${engine.name}`);
+      lines.push(`  ${engine.name}`);
     }
   }
 
