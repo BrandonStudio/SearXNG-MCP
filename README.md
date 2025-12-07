@@ -110,7 +110,3 @@ npm run dev
 
 - Node.js 18+
 - A running SearXNG instance with JSON API enabled
-
-## License
-
-MIT
