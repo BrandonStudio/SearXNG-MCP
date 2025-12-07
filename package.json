@@ -1,26 +1,20 @@
 {
-  "name": "searxng-mcp",
+  "name": "searxng-mcp-monorepo",
   "version": "1.0.0",
-  "description": "MCP server for SearXNG - a privacy-respecting metasearch engine",
+  "private": true,
+  "description": "Monorepo for searxng-mcp packages",
   "type": "module",
-  "main": "dist/index.js",
-  "bin": {
-    "searxng-mcp": "./dist/index.js"
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "tsc --watch"
+    "build": "pnpm -w -r run build",
+    "dev": "pnpm -w -r run dev",
+    "start:example": "pnpm --filter searxng-mcp start"
   },
   "keywords": ["mcp", "searxng", "search", "metasearch", "model-context-protocol"],
-  "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.23.0",
-    "zod": "^4.1.13"
-  },
   "devDependencies": {
-    "@types/node": "^24.10.1",
     "typescript": "^5.9.3"
   }
 }

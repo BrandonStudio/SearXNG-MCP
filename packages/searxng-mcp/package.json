@@ -1,0 +1,38 @@
+{
+  "name": "searxng-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for SearXNG",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "searxng-mcp": "./dist/server.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server.js",
+      "types": "./dist/server.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "dev": "tsc --watch -p tsconfig.json"
+  },
+  "keywords": ["mcp", "searxng", "search", "metasearch", "model-context-protocol"],
+  "author": "",
+  "license": "MIT",
+  "files": ["dist"],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.23.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
+  }
+}
