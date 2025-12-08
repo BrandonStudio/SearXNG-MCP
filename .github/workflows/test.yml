@@ -35,7 +35,7 @@ jobs:
 
       - name: Run and test stdio
         env:
-          SEARXNG_URL: ${{ env.SEARXNG_URL }}
+          SEARXNG_URL: ${{ secrets.SEARXNG_URL }}
         run: |
           try {
             $raw = npx -y @modelcontextprotocol/inspector --cli --method tools/list pnpm run start
@@ -48,7 +48,7 @@ jobs:
           if (-not $tools.tools -or $tools.tools.Count -eq 0) {
             Write-Error "No tools found in MCP output."
             exit 1
-          } else if ($tools.tools.Count -ne 2) {
+          } elseif ($tools.tools.Count -ne 2) {
             Write-Error "Unexpected number of tools found in MCP output. Expected 2, found $($tools.tools.Count)."
             exit 1
           } else {
