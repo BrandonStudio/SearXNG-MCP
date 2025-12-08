@@ -1,6 +1,6 @@
 {
-  "name": "searxng-mcp",
-  "version": "0.1.0",
+  "name": "@bs-mcps/searxng",
+  "version": "0.2.0",
   "description": "MCP server for SearXNG",
   "type": "module",
   "main": "dist/cli.js",
@@ -10,10 +10,12 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli.js",
+    "publish": "npm publish",
     "wrangler:dev": "wrangler dev src/cf-worker.ts",
     "wrangler:deploy": "wrangler deploy --keep-vars"
   },
   "keywords": [
+    "ai",
     "mcp",
     "searxng",
     "search",
@@ -21,7 +23,35 @@
     "model-context-protocol"
   ],
   "author": "BrandonStudio",
-  "license": "",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/BrandonStudio/SearXNG-MCP",
+  "bugs": {
+    "url": "https://github.com/BrandonStudio/SearXNG-MCP/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrandonStudio/SearXNG-MCP.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    "./searxng": {
+      "types": "./dist/searxng.d.ts",
+      "import": "./dist/searxng.js",
+      "require": "./dist/searxng.js"
+    },
+    "./plugins": {
+      "types": "./dist/plugins/index.d.ts",
+      "import": "./dist/plugins/index.js",
+      "require": "./dist/plugins/index.js"
+    }
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.23.0",
     "agents": "^0.2.30",

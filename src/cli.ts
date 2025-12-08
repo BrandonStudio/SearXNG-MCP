@@ -30,7 +30,7 @@ function getValidatedSearxngUrl(envUrl: string | undefined, fallback: string): s
 
 const SEARXNG_URL = getValidatedSearxngUrl(process.env.SEARXNG_URL, DEFAULT_SEARXNG_URL);
 const PORT = parseInt(process.env.PORT || "3000", 10);
-const TRANSPORT_MODE = process.env.TRANSPORT_MODE || "http"; // "http" or "stdio"
+const TRANSPORT_MODE = process.env.TRANSPORT_MODE || "stdio"; // "http" or "stdio"
 
 // Create SearXNG client
 const searxngClient = new SearXNGClient(SEARXNG_URL);
@@ -173,11 +173,11 @@ async function startStdioServer(): Promise<void> {
   console.error(`SearXNG URL: ${SEARXNG_URL}`);
 }
 
-async function main(): Promise<void> {
+function main(): Promise<void> {
   if (TRANSPORT_MODE === "stdio") {
-    await startStdioServer();
+    return startStdioServer();
   } else {
-    await startHttpServer();
+    return startHttpServer();
   }
 }
 
