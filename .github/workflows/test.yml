@@ -1,0 +1,80 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Enable Corepack and install pnpm
+        run: |
+          if (Get-Command corepack -ErrorAction SilentlyContinue) {
+            corepack enable
+            corepack prepare pnpm@latest --activate
+          } else {
+            npm install -g pnpm
+          }
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Run and test stdio
+        env:
+          SEARXNG_URL: ${{ env.SEARXNG_URL }}
+        run: |
+          try {
+            $raw = npx -y @modelcontextprotocol/inspector --cli --method tools/list pnpm run start
+            $tools = $raw | ConvertFrom-Json
+          } catch {
+            Write-Error "Failed to run MCP CLI or parse output as JSON."
+            Write-Error $_
+            exit $LASTEXITCODE
+          }
+          if (-not $tools.tools -or $tools.tools.Count -eq 0) {
+            Write-Error "No tools found in MCP output."
+            exit 1
+          } else if ($tools.tools.Count -ne 2) {
+            Write-Error "Unexpected number of tools found in MCP output. Expected 2, found $($tools.tools.Count)."
+            exit 1
+          } else {
+            Write-Output "Found $($tools.tools.Count) tools as expected."
+          }
+
+          Write-Output "Testing get_engines tool..."
+          try {
+            $engineRaw = npx -y @modelcontextprotocol/inspector --cli --method tools/call --tool-name get_engines pnpm run start
+            $engineResp = $engineRaw | ConvertFrom-Json
+            $engineContent = $engineResp.content
+            $engineText = $engineContent.text
+          } catch {
+            Write-Error "Failed to run get_engines tool or parse output as JSON."
+            Write-Error $_
+            exit $LASTEXITCODE
+          }
+
+          Write-Output "Testing search tool..."
+          try {
+            $searchRaw = npx -y @modelcontextprotocol/inspector --cli --method tools/call --tool-name search pnpm run start --tool-arg query='news'
+            $searchResp = $searchRaw | ConvertFrom-Json
+            $searchContent = $searchResp.content
+            $searchText = $searchContent.text
+          } catch {
+            Write-Error "Failed to run search tool or parse output as JSON."
+            Write-Error $_
+            exit $LASTEXITCODE
+          }

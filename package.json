@@ -1,16 +1,15 @@
 {
   "name": "@bs-mcps/searxng",
-  "version": "0.2.0",
+  "version": "0.2.7",
   "description": "MCP server for SearXNG",
   "type": "module",
   "main": "dist/cli.js",
   "bin": {
-    "searxng-mcp": "./dist/cli.js"
+    "bs-mcps-searxng": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli.js",
-    "publish": "npm publish",
     "wrangler:dev": "wrangler dev src/cf-worker.ts",
     "wrangler:deploy": "wrangler deploy --keep-vars"
   },
