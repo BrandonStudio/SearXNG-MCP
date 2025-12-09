@@ -8,6 +8,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Prepare inspector
+        run: npm install -g @modelcontextprotocol/inspector
       - name: Run and test Cloudflare Worker transport
         env:
           SEARXNG_URL: ${{ secrets.SEARXNG_URL }}

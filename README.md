@@ -86,7 +86,7 @@ You can deploy the MCP server as a Cloudflare Worker.
 
 To deploy, you can fork this repository and then create a new Worker linked to your fork.
 
-Or, you can simply click the button below to deploy directly to Cloudflare:
+Or, you can simply click the button below to deploy directly to Cloudflare:  
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/BrandonStudio/SearXNG-MCP)
 
 #### Required Environment Variables
