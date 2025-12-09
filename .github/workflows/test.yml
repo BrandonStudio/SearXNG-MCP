@@ -1,6 +1,7 @@
 name: Test
 
 on:
+  workflow_dispatch:
   push:
   pull_request:
     branches:
@@ -33,48 +34,7 @@ jobs:
       - name: Build project
         run: pnpm run build
 
-      - name: Run and test stdio
+      - name: Run and test
         env:
           SEARXNG_URL: ${{ secrets.SEARXNG_URL }}
-        run: |
-          try {
-            $raw = npx -y @modelcontextprotocol/inspector --cli --method tools/list pnpm run start
-            $tools = $raw | ConvertFrom-Json
-          } catch {
-            Write-Error "Failed to run MCP CLI or parse output as JSON."
-            Write-Error $_
-            exit $LASTEXITCODE
-          }
-          if (-not $tools.tools -or $tools.tools.Count -eq 0) {
-            Write-Error "No tools found in MCP output."
-            exit 1
-          } elseif ($tools.tools.Count -ne 2) {
-            Write-Error "Unexpected number of tools found in MCP output. Expected 2, found $($tools.tools.Count)."
-            exit 1
-          } else {
-            Write-Output "Found $($tools.tools.Count) tools as expected."
-          }
-
-          Write-Output "Testing get_engines tool..."
-          try {
-            $engineRaw = npx -y @modelcontextprotocol/inspector --cli --method tools/call --tool-name get_engines pnpm run start
-            $engineResp = $engineRaw | ConvertFrom-Json
-            $engineContent = $engineResp.content
-            $engineText = $engineContent.text
-          } catch {
-            Write-Error "Failed to run get_engines tool or parse output as JSON."
-            Write-Error $_
-            exit $LASTEXITCODE
-          }
-
-          Write-Output "Testing search tool..."
-          try {
-            $searchRaw = npx -y @modelcontextprotocol/inspector --cli --method tools/call --tool-name search pnpm run start --tool-arg query='news'
-            $searchResp = $searchRaw | ConvertFrom-Json
-            $searchContent = $searchResp.content
-            $searchText = $searchContent.text
-          } catch {
-            Write-Error "Failed to run search tool or parse output as JSON."
-            Write-Error $_
-            exit $LASTEXITCODE
-          }
+        run: pwsh -File ./tests/run_test.ps1

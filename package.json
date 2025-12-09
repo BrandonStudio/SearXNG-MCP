@@ -10,6 +10,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli.js",
+    "test": "pwsh -File tests/run_test.ps1",
+    "test:cf": "pwsh -File tests/run_test_cf.ps1",
     "wrangler:dev": "wrangler dev src/cf-worker.ts",
     "wrangler:deploy": "wrangler deploy --keep-vars"
   },
@@ -53,7 +55,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.23.0",
-    "agents": "^0.2.30",
+    "agents": "^0.2.31",
     "zod": "^3.25.76"
   },
   "devDependencies": {

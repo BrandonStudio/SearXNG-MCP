@@ -95,10 +95,6 @@ Or, you can simply click the button below to deploy directly to Cloudflare:
 | -------- | ----------- |
 | `SEARXNG_URL` | URL of your SearXNG instance |
 
-> [!NOTE]
->
-> Cloudflare Worker transport does not support the MCP Protocol Version 2025-11-25 yet, see [cloudflare/agents#719](https://github.com/cloudflare/agents/issues/719).
-
 ## Available Tools
 
 | Tool | Description |

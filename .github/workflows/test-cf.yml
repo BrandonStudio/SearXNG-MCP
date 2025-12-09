@@ -1,0 +1,15 @@
+name: Test Cloudflare Worker Transport
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-cf:
+    runs-on: windows-latest
+
+    steps:
+      - name: Run and test Cloudflare Worker transport
+        env:
+          SEARXNG_URL: ${{ secrets.SEARXNG_URL }}
+          CF_WORKER_URL: ${{ secrets.CF_WORKER_URL }}
+        run: pwsh -File .\tests\run_test_cf.ps1

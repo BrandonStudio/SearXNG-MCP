@@ -12,8 +12,8 @@ importers:
         specifier: ^1.23.0
         version: 1.24.3(@cfworker/json-schema@4.1.1)(zod@3.25.76)
       agents:
-        specifier: ^0.2.30
-        version: 0.2.30(@cloudflare/workers-types@4.20251205.0)(react@19.2.1)(typescript@5.9.3)
+        specifier: ^0.2.31
+        version: 0.2.31(@cloudflare/workers-types@4.20251205.0)(react@19.2.1)(typescript@5.9.3)
       zod:
         specifier: ^3.25.76
         version: 3.25.76
@@ -456,8 +456,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  agents@0.2.30:
-    resolution: {integrity: sha512-lrgcaOENROLv9DInKxN2hJTAORuuVMFG/dMY00+hDS8p2/gPubQIJzVDi7hr0A8+NmKfMuGy1YQfxP1/KW0C4Q==}
+  agents@0.2.31:
+    resolution: {integrity: sha512-YhZYc8HjwNz/CqFKRcSlhEwKhGF6NKeZLpViqGNQOVDfgBS9XLBfiz9Eiz7cEWn/ae9pMosk2j6nuTJzkTl/vA==}
     hasBin: true
     peerDependencies:
       react: '*'
@@ -1401,7 +1401,7 @@ snapshots:
 
   acorn@8.14.0: {}
 
-  agents@0.2.30(@cloudflare/workers-types@4.20251205.0)(react@19.2.1)(typescript@5.9.3):
+  agents@0.2.31(@cloudflare/workers-types@4.20251205.0)(react@19.2.1)(typescript@5.9.3):
     dependencies:
       '@ai-sdk/openai': 2.0.73(zod@3.25.76)
       '@cfworker/json-schema': 4.1.1
