@@ -24,7 +24,7 @@ function formatSearchResults(results: SearXNGSearchResult[]): string {
     ${result.content}
   </result>
 `)
-  return '<results>\n' + resultsCore + '\n</results>';
+  return '<results>\n' + resultsCore.join('') + '\n</results>';
 }
 
 function formatEngines(engines: SearXNGEngine[]): string {
