@@ -54,8 +54,8 @@
     }
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.23.0",
-    "agents": "^0.2.31",
+    "@modelcontextprotocol/sdk": "^1.25.2",
+    "agents": "^0.2.35",
     "zod": "^3.25.76"
   },
   "devDependencies": {
@@ -63,5 +63,11 @@
     "@types/node": "^24.10.1",
     "typescript": "^5.9.3",
     "wrangler": "^4.53.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@modelcontextprotocol/sdk": ">=1.25.2",
+      "qs": ">=6.14.1"
+    }
   }
 }
