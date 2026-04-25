@@ -6,8 +6,9 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { randomUUID } from "crypto";
 import { createServer as createHttpServer, IncomingMessage, ServerResponse } from "http";
 
-import { SearXNGClient } from "./searxng.js";
-import { registerGetEnginesTool, registerSearchTool } from './plugins.js';
+import { SearXNGClient } from "./searxng";
+import { registerGetEnginesTool, registerSearchTool } from './plugins';
+import { version } from "./version";
 
 // Configuration
 const DEFAULT_SEARXNG_URL = "http://localhost:8080";
@@ -41,7 +42,7 @@ const searxngClient = new SearXNGClient(SEARXNG_URL);
 function createConfiguredServer(): McpServer {
   const server = new McpServer({
     name: "searxng-mcp",
-    version: "0.3.0",
+    version,
   });
   registerGetEnginesTool(server, searxngClient);
   registerSearchTool(server, searxngClient);

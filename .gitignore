@@ -1,3 +1,6 @@
+# Dynamically generated file, do not track
+src/version.ts
+
 # Logs
 logs
 *.log

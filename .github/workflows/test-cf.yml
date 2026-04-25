@@ -1,17 +1,41 @@
 name: Test Cloudflare Worker Transport
 
 on:
-  workflow_dispatch:
+  issue_comment:
+    types:
+      - created
+      - edited
 
 jobs:
   test-cf:
-    runs-on: windows-latest
+    if: ${{ github.event.issue.pull_request && (github.event.comment.user.type == 'Bot' && github.event.comment.user.html_url == 'https://github.com/apps/cloudflare-workers-and-pages') }}
+    runs-on: ubuntu-latest
 
     steps:
+      - name: Get deployment URL
+        id: get_url
+        uses: actions/github-script@v9
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        with:
+          script: |
+            const body = process.env.COMMENT_BODY;
+            if (!body.includes('Deployment successful')) {
+              core.setFailed('Deployment failed.');
+              return;
+            }
+            const urlMatches = body.matchAll(/https:\/\/[^\s]+\.workers\.dev/g)?.toArray()?.flat();
+            if (!urlMatches) {
+              core.setFailed('No deployment URL found.');
+              return;
+            }
+            return urlMatches[0];
+
+      - name: Checkout code
+        uses: actions/checkout@v6
       - name: Prepare inspector
         run: npm install -g @modelcontextprotocol/inspector
       - name: Run and test Cloudflare Worker transport
         env:
-          SEARXNG_URL: ${{ secrets.SEARXNG_URL }}
-          CF_WORKER_URL: ${{ secrets.CF_WORKER_URL }}
+          CF_WORKER_URL: ${{ steps.get_url.outputs.result }}
         run: pwsh -File .\tests\run_test_cf.ps1

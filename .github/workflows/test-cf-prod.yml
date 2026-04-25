@@ -1,0 +1,34 @@
+name: Test Cloudflare Worker Transport (Production)
+
+on:
+  workflow_dispatch:
+  # Workflow triggerred by bot cannot be applied here.
+  # workflow_run:
+  #   workflows:
+  #     - Cloudflare Workers and Pages
+  #   types:
+  #     - completed
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  test-cf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Prepare inspector
+        run: npm install -g @modelcontextprotocol/inspector
+      - name: Download test script
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path .\tests
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/searxng/searxng-mcp/main/tests/test.ps1" -OutFile ".\tests\test.ps1"
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/searxng/searxng-mcp/main/tests/run_test_cf.ps1" -OutFile ".\tests\run_test_cf.ps1"
+      - name: Run and test Cloudflare Worker transport
+        env:
+          CF_WORKER_URL: ${{ secrets.CF_WORKER_URL }}
+        run: pwsh -File .\tests\run_test_cf.ps1
