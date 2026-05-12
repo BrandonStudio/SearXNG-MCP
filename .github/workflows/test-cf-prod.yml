@@ -28,8 +28,8 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Path .\tests
-          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/searxng/searxng-mcp/main/tests/test.ps1" -OutFile ".\tests\test.ps1"
-          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/searxng/searxng-mcp/main/tests/run_test_cf.ps1" -OutFile ".\tests\run_test_cf.ps1"
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/BrandonStudio/SearXNG-MCP/main/tests/test.ps1" -OutFile ".\tests\test.ps1"
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/BrandonStudio/SearXNG-MCP/main/tests/run_test_cf.ps1" -OutFile ".\tests\run_test_cf.ps1"
       - name: Run and test Cloudflare Worker transport
         env:
           CF_WORKER_URL: ${{ secrets.CF_WORKER_URL }}
