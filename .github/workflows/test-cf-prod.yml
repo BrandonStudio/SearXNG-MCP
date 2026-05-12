@@ -4,7 +4,7 @@ permissions: {}
 
 on:
   workflow_dispatch:
-  # Workflow triggerred by bot cannot be applied here.
+  # Workflow triggered by bot cannot be applied here.
   # workflow_run:
   #   workflows:
   #     - Cloudflare Workers and Pages
