@@ -68,15 +68,5 @@
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "wrangler": "^4.81.0"
-  },
-  "pnpm": {
-    "overrides": {
-    },
-    "onlyBuiltDependencies": [
-      "core-js-pure",
-      "esbuild",
-      "sharp",
-      "workerd"
-    ]
   }
 }
