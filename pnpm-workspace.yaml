@@ -1,6 +1,7 @@
-overrides: {}
 allowBuilds:
   core-js-pure: true # by agents
   esbuild: true # by tsup
   sharp: true # by wrangler
   workerd: true # by wrangler
+overrides: {}
+packages: []
