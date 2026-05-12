@@ -1,6 +1,6 @@
 {
   "name": "@bs-mcps/searxng",
-  "version": "0.4.0-dev.1",
+  "version": "0.4.0-dev.2",
   "description": "MCP server for SearXNG",
   "type": "module",
   "main": "dist/cli.js",
@@ -58,14 +58,14 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "agents": "^0.10.0",
-    "zod": "^4.3.6"
+    "agents": "^0.10.2",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260408.1",
-    "@types/node": "^24.12.2",
+    "@cloudflare/workers-types": "^4.20260511.1",
+    "@types/node": "^24.12.4",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "wrangler": "^4.81.0"
+    "wrangler": "^4.90.1"
   }
 }
