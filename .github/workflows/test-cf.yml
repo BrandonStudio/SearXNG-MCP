@@ -1,5 +1,8 @@
 name: Test Cloudflare Worker Transport
 
+permissions:
+  contents: read
+
 on:
   issue_comment:
     types:

@@ -1,5 +1,7 @@
 name: Test Cloudflare Worker Transport (Production)
 
+permissions: {}
+
 on:
   workflow_dispatch:
   # Workflow triggerred by bot cannot be applied here.

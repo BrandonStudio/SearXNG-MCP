@@ -1,6 +1,6 @@
 {
   "name": "@bs-mcps/searxng",
-  "version": "0.4.0-dev.0",
+  "version": "0.4.0-dev.1",
   "description": "MCP server for SearXNG",
   "type": "module",
   "main": "dist/cli.js",
@@ -8,7 +8,7 @@
     "bs-mcps-searxng": "dist/cli.js"
   },
   "scripts": {
-    "prebuild": "node -e \"require('fs').writeFileSync('src/version.ts', 'export const version = \\'' + require('./package.json').version + '\\';\\n')\"",
+    "prebuild": "node -e \"require('fs').writeFileSync('src/version.ts', 'export const version = ' + JSON.stringify(require('./package.json').version) + ';\\n')\"",
     "build": "npm run prebuild && npm run build:cli",
     "start": "node dist/cli.js",
     "test": "pwsh -File tests/run_test.ps1",
@@ -52,9 +52,9 @@
       "require": "./dist/searxng.js"
     },
     "./plugins": {
-      "types": "./dist/plugins/index.d.ts",
-      "import": "./dist/plugins/index.js",
-      "require": "./dist/plugins/index.js"
+      "types": "./dist/plugins.d.ts",
+      "import": "./dist/plugins.js",
+      "require": "./dist/plugins.js"
     }
   },
   "dependencies": {
