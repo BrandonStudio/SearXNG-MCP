@@ -1,8 +1,15 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { SearXNGClient, SEARXNG_SEARCH_RESULT_CORE_KEYS, type SearXNGSearchResult, type SearXNGEngine } from "./searxng.js";
+
 import type { ShapeOutput } from "@modelcontextprotocol/sdk/server/zod-compat.d.ts";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.d.ts";
+
+import {
+  SearXNGClient,
+  SEARXNG_SEARCH_RESULT_CORE_KEYS,
+  type SearXNGSearchResult,
+  type SearXNGEngine,
+} from "./searxng";
 
 function createErrorResponse(error: unknown, context: string) {
   const errorMessage = error instanceof Error ? error.message : String(error);

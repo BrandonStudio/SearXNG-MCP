@@ -21,7 +21,7 @@ jobs:
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
         with:
-          results-encoding: string
+          result-encoding: string
           script: |
             const body = process.env.COMMENT_BODY;
             if (!body.includes('Deployment successful')) {
