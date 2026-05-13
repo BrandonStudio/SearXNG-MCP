@@ -55,7 +55,10 @@ jobs:
       - name: Run and test Cloudflare Worker transport
         env:
           CF_WORKER_URL: ${{ steps.get_url.outputs.result }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
         run: pwsh -File "./tests/run_test_cf.ps1"
+
       - name: Update check status
         if: ${{ always() && steps.start_check.conclusion == 'success' }}
         uses: actions/github-script@v9
