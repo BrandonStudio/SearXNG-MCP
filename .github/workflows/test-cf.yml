@@ -57,7 +57,7 @@ jobs:
           CF_WORKER_URL: ${{ steps.get_url.outputs.result }}
         run: pwsh -File "./tests/run_test_cf.ps1"
       - name: Update check status
-        if: ${{ steps.start_check.conclusion == 'success' }}
+        if: ${{ always() && steps.start_check.conclusion == 'success' }}
         uses: actions/github-script@v9
         env:
           JOB_STATUS: ${{ job.status }}
@@ -72,6 +72,7 @@ jobs:
               status: 'completed',
               conclusion: process.env.JOB_STATUS === 'success' ? 'success' : 'failure',
               output: {
+                title: `Cloudflare Worker Transport Test`,
                 summary: `Test ${process.env.JOB_STATUS}.\nDetails: https://github.com/${owner}/${repo}/actions/runs/${context.runId}`,
               },
             });
