@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Prepare SearXNG configuration
         run: |
-          apt install -y yq
+          sudo apt install -y yq
           yq -y -i '.search.formats = ["json"]' /tmp/searxng_config/settings.yml
           docker restart ${{ job.services.searxng.id }}
 
