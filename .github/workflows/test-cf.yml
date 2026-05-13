@@ -22,17 +22,16 @@ jobs:
         uses: actions/github-script@v9
         with:
           script: |
-            const { owner, repo } = context.repo;
-            const pr = await github.rest.pulls.get({ owner, repo, pull_number: ${{ github.event.issue.number }} });
-            const { id } = await github.rest.checks.create({
+            const { owner, repo, number } = context.issue;
+            const pr = await github.rest.pulls.get({ owner, repo, pull_number: number });
+            const { data } = await github.rest.checks.create({
               owner,
               repo,
               name: 'Cloudflare Worker Transport Test',
               head_sha: pr.data.head.sha,
               status: 'in_progress',
             });
-            core.warning(`Started check with ID: ${id}`);
-            return id;
+            return data.id;
       - name: Get deployment URL
         id: get_url
         uses: actions/github-script@v9
