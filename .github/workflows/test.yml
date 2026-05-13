@@ -33,8 +33,8 @@ jobs:
       - name: Prepare SearXNG configuration
         run: |
           sudo apt install -y yq
-          yq -y -i '.search.formats = ["json"]' /tmp/searxng_config/settings.yml
-          docker restart ${{ job.services.searxng.id }}
+          sudo yq -y -i '.search.formats = ["json"]' /tmp/searxng_config/settings.yml
+          sudo docker restart ${{ job.services.searxng.id }}
 
       - uses: actions/checkout@v6
 
