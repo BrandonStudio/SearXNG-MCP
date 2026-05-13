@@ -42,6 +42,10 @@ function RunTestCore {
         [string[]]$CommandArgs
     )
     $tmpFile = New-TemporaryFile
+    # Write-Host $CommandArgs.Length
+    # for ($i = 0; $i -lt $CommandArgs.Length; $i++) {
+    #     Write-Host "Arg[$i]: $($CommandArgs[$i])"
+    # }
 
     try {
         $raw = npx -y "$InspectorPackage" --cli @CommandArgs --method tools/list 2>$tmpFile
@@ -124,12 +128,12 @@ function RunTest {
     param (
         [string]$Name,
         [Test[]]$Tests,
-        [string]$Command
+        [string[]]$Command
     )
 
     Write-Host "========== Begin $($Name) Tests ==========`n"
 
-    RunTestCore -Tests $Tests -CommandArgs $Command.Split(" ")
+    RunTestCore -Tests $Tests -CommandArgs $Command
 
     $succeededTests = $Tests | Where-Object { $_.Passed -eq $true }
     $failedTests = $Tests | Where-Object { $_.Passed -eq $false -and $_.Skipped -eq $false }

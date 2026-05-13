@@ -17,13 +17,13 @@ $httpTests = @(
 )
 
 $env:TRANSPORT_MODE = "stdio"
-$stdioResult = RunTest -Name "stdio" -Tests $stdioTests -Command "pnpm run start"
+$stdioResult = RunTest -Name "stdio" -Tests $stdioTests -Command "pnpm run start".Split(" ")
 
 $env:TRANSPORT_MODE = "http"
 pnpm run start &
 Write-Host "Waiting 10 seconds for HTTP server to start..."
 Start-Sleep -Seconds 10
-$httpResult = RunTest -Name "http" -Tests $httpTests -Command "--transport http http://localhost:3000/mcp"
+$httpResult = RunTest -Name "http" -Tests $httpTests -Command "--transport http http://localhost:3000/mcp".Split(" ")
 
 if ($stdioResult -eq 0 -and $httpResult -eq 0) {
     Write-Host "`n`e[32mAll tests passed.`e[0m"
