@@ -71,4 +71,7 @@ jobs:
               check_run_id: checkId,
               status: 'completed',
               conclusion: process.env.JOB_STATUS === 'success' ? 'success' : 'failure',
+              output: {
+                summary: `Test ${process.env.JOB_STATUS}.\nDetails: https://github.com/${owner}/${repo}/actions/runs/${context.runId}`,
+              },
             });
