@@ -12,9 +12,9 @@ $url = "$env:CF_WORKER_URL/mcp"
 $commandArgs = "--transport http $url".Split(" ")
 if ($env:CF_ACCESS_CLIENT_ID -and $env:CF_ACCESS_CLIENT_SECRET) {
     $commandArgs += "--header"
-    $commandArgs += "CF-Access-Client-Id: $env:CF_ACCESS_CLIENT_ID"
+    $commandArgs += "`"CF-Access-Client-Id: $env:CF_ACCESS_CLIENT_ID`""
     $commandArgs += "--header"
-    $commandArgs += "CF-Access-Client-Secret: $env:CF_ACCESS_CLIENT_SECRET"
+    $commandArgs += "`"CF-Access-Client-Secret: $env:CF_ACCESS_CLIENT_SECRET`""
 }
 $code = RunTest -Name "Cloudflare Worker" -Tests $tests -Command $commandArgs
 

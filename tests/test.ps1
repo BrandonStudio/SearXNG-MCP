@@ -43,9 +43,9 @@ function RunTestCore {
     )
     $tmpFile = New-TemporaryFile
     Write-Host $CommandArgs.Length
-    # for ($i = 0; $i -lt $CommandArgs.Length; $i++) {
-    #     Write-Host "Arg[$i]: $($CommandArgs[$i])"
-    # }
+    for ($i = 0; $i -lt $CommandArgs.Length; $i++) {
+        Write-Host "Arg[$i]: $($CommandArgs[$i])"
+    }
 
     try {
         $raw = npx -y "$InspectorPackage" --cli @CommandArgs --method tools/list 2>$tmpFile
