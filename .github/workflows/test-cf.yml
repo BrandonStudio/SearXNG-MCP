@@ -50,6 +50,10 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v6
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
       - name: Prepare inspector
         run: npm install -g @modelcontextprotocol/inspector && npx --version
       - name: Run and test Cloudflare Worker transport
