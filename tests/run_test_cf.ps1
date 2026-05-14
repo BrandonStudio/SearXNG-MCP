@@ -16,7 +16,6 @@ if ($env:CF_ACCESS_CLIENT_ID -and $env:CF_ACCESS_CLIENT_SECRET) {
     $commandArgs += "--header"
     $commandArgs += "CF-Access-Client-Secret: $env:CF_ACCESS_CLIENT_SECRET"
 }
-Write-Host "Running tests with command arguments: $commandArgs"
 $code = RunTest -Name "Cloudflare Worker" -Tests $tests -Command $commandArgs
 
 exit $code

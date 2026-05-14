@@ -42,7 +42,7 @@ function RunTestCore {
         [string[]]$CommandArgs
     )
     $tmpFile = New-TemporaryFile
-    # Write-Host $CommandArgs.Length
+    Write-Host $CommandArgs.Length
     # for ($i = 0; $i -lt $CommandArgs.Length; $i++) {
     #     Write-Host "Arg[$i]: $($CommandArgs[$i])"
     # }
