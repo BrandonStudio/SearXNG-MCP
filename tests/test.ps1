@@ -42,17 +42,8 @@ function RunTestCore {
         [string[]]$CommandArgs
     )
     $tmpFile = New-TemporaryFile
-    Write-Host $CommandArgs.Length
-    for ($i = 0; $i -lt $CommandArgs.Length; $i++) {
-        Write-Host "Arg[$i]: $($CommandArgs[$i])"
-    }
-    $tmpFile2 = New-TemporaryFile
-    # $tmpFile2 = "/tmp/test_script.js"
-    Set-Content -Path $tmpFile2 -Value "#!/usr/bin/env node`nconsole.log('process.argv.length: ' + process.argv.length);`nconsole.log('process.argv: ' + JSON.stringify(process.argv));"
-    chmod +x $tmpFile2
 
     try {
-        & $tmpFile2 --cli @CommandArgs --method tools/list | Write-Host
         $raw = npx -y "$InspectorPackage" --cli @CommandArgs --method tools/list 2>$tmpFile
         $exitCode = $LASTEXITCODE
         if ($exitCode -ne 0) {
@@ -126,7 +117,6 @@ function RunTestCore {
         }
     } finally {
         Remove-Item -Path $tmpFile -ErrorAction SilentlyContinue
-        Remove-Item -Path $tmpFile2 -ErrorAction SilentlyContinue
     }
 }
 
