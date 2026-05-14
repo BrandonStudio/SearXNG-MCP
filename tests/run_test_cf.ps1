@@ -11,6 +11,9 @@ $tests = @(
 $url = "$env:CF_WORKER_URL/mcp"
 $commandArgs = "$url --transport http".Split(" ")
 if ($env:CF_ACCESS_CLIENT_ID -and $env:CF_ACCESS_CLIENT_SECRET) {
+    if ($env:CF_ACCESS_CLIENT_ID.StartsWith("`"")) {
+        Write-Host "WARNING: quoted"
+    }
     $commandArgs += "--header"
     $commandArgs += "CF-Access-Client-Id: $env:CF_ACCESS_CLIENT_ID"
     $commandArgs += "--header"
