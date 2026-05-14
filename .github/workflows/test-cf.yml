@@ -51,7 +51,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
       - name: Prepare inspector
-        run: npm install -g @modelcontextprotocol/inspector
+        run: npm install -g @modelcontextprotocol/inspector && npx --version
       - name: Run and test Cloudflare Worker transport
         env:
           CF_WORKER_URL: ${{ steps.get_url.outputs.result }}
